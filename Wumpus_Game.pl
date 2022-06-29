@@ -52,13 +52,12 @@ breeze(room(X,Y)):-
 
 %-------------------------- Finding Stench--------------------------------
 stench(room(X,Y)):-
-     forall(wumpus_position(room(W,Z)), adjacentTo(room(X,Y),room(W,Z))),
-    format("Stench in room (~w,~w) ~n", [X,Y]).
-
+     forall(wumpus_position(room(W,Z)), adjacentTo(room(X,Y),room(W,Z))).
+    
 
 %-------------------------- Finding Wumpus--------------------------------
 wumpus(room(X,Y)):-
-    wumpus_position(room(X,Y)),
+    forall(adjacentTo(room(X,Y),room(W,Z)), stench(room(W,Z))),
     format("Wumpus in room (~w,~w) ~n", [X,Y]).
 
 
